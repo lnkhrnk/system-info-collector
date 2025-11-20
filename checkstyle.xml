@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <property name="charset" value="UTF-8"/>
+    <property name="severity" value="error"/>
+
+    <module name="TreeWalker">
+        <!-- Запрещаем использование @Deprecated -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.annotation.DeprecatedCheck">
+            <property name="severity" value="error"/>
+        </module>
+        <module name="LineLength">
+            <property name="max" value="120"/>
+        </module>
+    </module>
+</module>
