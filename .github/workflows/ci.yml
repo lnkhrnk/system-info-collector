@@ -1,0 +1,40 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build-and-test:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+
+      - name: Make gradlew executable
+        if: runner.os != 'Windows'
+        run: chmod +x gradlew
+
+      - name: Checkstyle
+        run: ./gradlew checkstyleMain
+
+      - name: Build & Test
+        run: ./gradlew clean test build
+
+      - name: Upload JAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: system-info-${{ runner.os }}.jar
+          path: build/libs/*.jar
