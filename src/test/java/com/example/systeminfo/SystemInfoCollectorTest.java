@@ -9,18 +9,19 @@ import static org.junit.jupiter.api.Assertions.*;
 class SystemInfoCollectorTest {
 
     @Test
-    void mainPrintsJson() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    void mainPrintsValidJson() {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream original = System.out;
-        System.setOut(new PrintStream(baos));
+        System.setOut(new PrintStream(out));
 
         SystemInfoCollector.main(new String[0]);
 
-        String output = baos.toString();
-        assertTrue(output.contains("os"));
-        assertTrue(output.contains("cpu"));
-        assertTrue(output.contains("memory"));
-        assertTrue(output.contains("{"));
+        String output = out.toString().trim();
+
+        assertTrue(output.startsWith("{"), "Output should be valid JSON");
+        assertTrue(output.contains("\"os\""), "JSON must contain os field");
+        assertTrue(output.contains("\"cpu\""), "JSON must contain cpu field");
+        assertTrue(output.contains("\"memory\""), "JSON must contain memory field");
 
         System.setOut(original);
     }
