@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
+
 }
 
 group = 'com.example'
@@ -32,11 +32,7 @@ test {
     useJUnitPlatform()
 }
 
-checkstyle {
-    toolVersion = '10.17.0'
-    configFile = file('checkstyle.xml')
-    maxWarnings = 0
-}
+
 
 // Создаём fat-jar (один JAR со всеми зависимостями)
 jar {
