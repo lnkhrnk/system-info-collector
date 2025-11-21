@@ -9,20 +9,23 @@ import static org.junit.jupiter.api.Assertions.*;
 class SystemInfoCollectorTest {
 
     @Test
-    void mainPrintsValidJson() {
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        PrintStream original = System.out;
-        System.setOut(new PrintStream(out));
+    void mainPrintsValidJsonToStdout() {
+        ByteArrayOutputStream capturedOutput = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
 
-        SystemInfoCollector.main(new String[0]);
+        try {
+            System.setOut(new PrintStream(capturedOutput));
+            SystemInfoCollector.main(new String[0]);
+        } finally {
+            System.setOut(originalOut);
+        }
 
-        String output = out.toString().trim();
+        String output = capturedOutput.toString().trim();
 
-        assertTrue(output.startsWith("{"), "Output should be valid JSON");
-        assertTrue(output.contains("\"os\""), "JSON must contain os field");
-        assertTrue(output.contains("\"cpu\""), "JSON must contain cpu field");
-        assertTrue(output.contains("\"memory\""), "JSON must contain memory field");
-
-        System.setOut(original);
+        assertFalse(output.isEmpty(), "Output should not be empty");
+        assertTrue(output.startsWith("{"), "Output should be valid JSON object");
+        assertTrue(output.contains("\"os\""), "JSON must contain 'os' field");
+        assertTrue(output.contains("\"cpu\""), "JSON must contain 'cpu' field");
+        assertTrue(output.contains("\"memory\""), "JSON must contain 'memory' field");
     }
 }
