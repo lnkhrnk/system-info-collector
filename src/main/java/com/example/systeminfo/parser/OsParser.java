@@ -19,7 +19,6 @@ class LinuxOsParser implements OsParser {
             try (BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()))) {
                 String name = r.readLine();
                 if (name == null || name.isBlank()) name = "Linux";
-                // Попробуем вытащить версию отдельно
                 Process v = Runtime.getRuntime().exec(new String[]{"bash", "-c", "lsb_release -rs || cat /etc/os-release | grep VERSION_ID | cut -d= -f2 | tr -d '\"'"});
                 try (BufferedReader vr = new BufferedReader(new InputStreamReader(v.getInputStream()))) {
                     String version = vr.readLine();

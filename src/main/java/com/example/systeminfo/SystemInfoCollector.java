@@ -8,7 +8,7 @@ import java.util.Properties;
 
 public class SystemInfoCollector {
 
-    public static void main(String[] args) {   // ← убрал throws Exception — это и ломало тест
+    public static void main(String[] args) {
         try {
             Properties config = loadConfig();
             String unit = config.getProperty("memory.output.unit", "MB");
@@ -25,7 +25,7 @@ public class SystemInfoCollector {
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
             System.out.println(mapper.writeValueAsString(info));
         } catch (Exception e) {
-            System.err.println("Ошибка при сборе информации: " + e.getMessage());
+            System.err.println("Error collecting system info: " + e.getMessage());
             e.printStackTrace();
         }
     }

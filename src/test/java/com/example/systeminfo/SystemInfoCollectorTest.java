@@ -14,7 +14,6 @@ class SystemInfoCollectorTest {
         PrintStream original = System.out;
         System.setOut(new PrintStream(baos));
 
-        // Теперь main() без throws Exception → тест компилируется
         SystemInfoCollector.main(new String[0]);
 
         String output = baos.toString();
