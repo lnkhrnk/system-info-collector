@@ -1,7 +1,7 @@
 package com.example.systeminfo;
 
 /**
- * Определяет тип операционной системы.
+ * Detects the type of operating system.
  */
 public class OSDetector {
     /**
