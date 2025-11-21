@@ -14,6 +14,6 @@ public class OSDetector {
         } else if (os.contains("nix") || os.contains("nux") || os.contains("mac")) {
             return "linux";
         }
-        throw new UnsupportedOperationException("Неизвестная ОС: " + os);
+        throw new UnsupportedOperationException("Unknown OS: " + os);
     }
 }
