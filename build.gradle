@@ -32,43 +32,28 @@ test {
     useJUnitPlatform()
 }
 
+checkstyle {
+    toolVersion = '10.17.0'
+    maxErrors = 0
+    maxWarnings = 0
 
-tasks.register('writeCheckstyleConfig') {
-    doLast {
-        def configText = """<?xml version="1.0"?>
+
+    config = resources.text.fromString("""<?xml version="1.0"?>
 <module name="Checker">
     <property name="charset" value="UTF-8"/>
     <property name="severity" value="error"/>
+    <property name="fileExtensions" value="java, properties, xml"/>
     
     <module name="TreeWalker">
         <module name="DeprecatedAnnotation"/>
         <module name="AvoidStarImport"/>
         <module name="UnusedImports"/>
+        <module name="LineLength">
+            <property name="max" value="120"/>
+        </module>
     </module>
-</module>"""
-
-        def f = layout.buildDirectory.file("checkstyle-generated.xml").get().asFile
-        f.parentFile.mkdirs()
-        f.write(configText, 'UTF-8')
-        println "Checkstyle config generated at: " + f.absolutePath
-    }
+</module>""")
 }
-
-checkstyle {
-    toolVersion = '10.17.0'
-    configFile = layout.buildDirectory.file("checkstyle-generated.xml").get().asFile
-    maxErrors = 0
-    maxWarnings = 0
-    ignoreFailures = false
-}
-
-tasks.named('checkstyleMain') {
-    dependsOn 'writeCheckstyleConfig'
-}
-tasks.named('checkstyleTest') {
-    dependsOn 'writeCheckstyleConfig'
-}
-
 
 jar {
     manifest {
