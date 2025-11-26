@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<module name="Checker">
+    <module name="TreeWalker">
+        <!-- Те самые проверки из задания -->
+        <module name="DeprecatedAnnotation"/>
+        <module name="AvoidStarImport"/>
+        <module name="UnusedImports"/>
+        
+        <module name="LineLength">
+            <property name="max" value="120"/>
+        </module>
+    </module>
+</module>
