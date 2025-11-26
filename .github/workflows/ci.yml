@@ -27,10 +27,19 @@ jobs:
         if: runner.os != 'Windows'
         run: chmod +x gradlew
 
-      # ← Checkstyle полностью убран — больше не будет красных крестиков
-
       - name: Build & Test
-        run: ./gradlew clean test build
+        run: ./gradlew clean test build --info
+
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always()
+        with:
+          report_paths: '**/build/test-results/test/TEST-*.xml'
+          annotate_only: false
+          include_passed: true
+
+      - name: Static analysis (Checkstyle)
+        run: ./gradlew checkstyleMain checkstyleTest
 
       - name: Upload JAR
         uses: actions/upload-artifact@v4

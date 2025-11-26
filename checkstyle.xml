@@ -5,12 +5,18 @@
 
 <module name="Checker">
     <property name="charset" value="UTF-8"/>
-    <property name="severity" value="warning"/>   <!-- ← вот эта строка решает все проблемы -->
+    <property name="severity" value="error"/>
 
     <module name="TreeWalker">
-        <!-- Оставляем только мягкие проверки — они не валят сборку -->
+        <module name="AnnotationUseStyle"/>
+        <module name="DeprecatedAnnotation">
+            <property name="severity" value="error"/>
+        </module>
+
         <module name="LineLength">
             <property name="max" value="120"/>
         </module>
+        <module name="TrailingComment"/>
+        <module name="AvoidStarImport"/>
     </module>
 </module>
