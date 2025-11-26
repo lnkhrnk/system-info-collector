@@ -34,13 +34,15 @@ test {
 
 checkstyle {
     toolVersion = '10.17.0'
-    config = resources.text.fromClasspath('checkstyle/sun_checks.xml')
     maxErrors = 0
     maxWarnings = 0
     reports {
         xml.required = true
         html.required = true
     }
+}
+tasks.withType(Checkstyle) {
+    configProperties = ['maxLen': '120']
 }
 
 jar {
