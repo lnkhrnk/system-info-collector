@@ -35,11 +35,10 @@ test {
 checkstyle {
     toolVersion = '10.17.0'
     configFile = file("checkstyle.xml")
-    maxErrors = 0        //  любое @Deprecated - ошибка
-    maxWarnings = 0      //  и предупреждения тоже запрещаем
+    maxErrors = 0
+    maxWarnings = 0
 }
 
-// Создаём fat-jar (один JAR со всеми зависимостями)
 jar {
     manifest {
         attributes 'Main-Class': application.mainClass
