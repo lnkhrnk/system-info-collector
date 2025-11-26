@@ -34,7 +34,7 @@ test {
 
 checkstyle {
     toolVersion = '10.17.0'
-    configFile = file("checkstyle.xml")
+    configFile = file("${project.rootDir}/checkstyle.xml")
     maxErrors = 0
     maxWarnings = 0
 }
