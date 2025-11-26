@@ -33,24 +33,33 @@ test {
 }
 
 checkstyle {
-    toolVersion = '10.17.0'
+    // Используем стабильную версию
+    toolVersion = '10.12.0'
     maxErrors = 0
     maxWarnings = 0
 
-
     config = resources.text.fromString("""<?xml version="1.0"?>
-<module name="Checker">
+<module name="com.puppycrawl.tools.checkstyle.Checker">
     <property name="charset" value="UTF-8"/>
     <property name="severity" value="error"/>
     <property name="fileExtensions" value="java, properties, xml"/>
     
-    <module name="TreeWalker">
-        <module name="DeprecatedAnnotation"/>
-        <module name="AvoidStarImport"/>
-        <module name="UnusedImports"/>
-        <module name="LineLength">
+    <module name="com.puppycrawl.tools.checkstyle.TreeWalker">
+        
+        <!-- Проверка @Deprecated -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.annotation.DeprecatedAnnotationCheck"/>
+        
+        <!-- Проверка импортов через * -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.AvoidStarImportCheck"/>
+        
+        <!-- Проверка неиспользуемых импортов -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.imports.UnusedImportsCheck"/>
+        
+        <!-- Длина строки -->
+        <module name="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck">
             <property name="max" value="120"/>
         </module>
+        
     </module>
 </module>""")
 }
