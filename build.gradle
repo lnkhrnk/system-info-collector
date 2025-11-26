@@ -34,9 +34,13 @@ test {
 
 checkstyle {
     toolVersion = '10.17.0'
-    configFile = file("${project.rootDir}/checkstyle.xml")
+    config = resources.text.fromArchiveEntry(getClass(), 'default-checkstyle.xml')
     maxErrors = 0
     maxWarnings = 0
+    configProperties = [
+            'maxLen': '120',
+            'ignoreLineNumbers': 'true'
+    ]
 }
 
 jar {
