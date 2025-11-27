@@ -6,8 +6,17 @@ import com.fasterxml.jackson.databind.*;
 import java.nio.file.*;
 import java.util.Properties;
 
+/**
+ * Main entry point of the application.
+ * Orchestrates the detection of OS, parsing of system info, and JSON output.
+ */
 public class SystemInfoCollector {
 
+    /**
+     * Main method.
+     *
+     * @param args Command line arguments (not used).
+     */
     public static void main(String[] args) {
         try {
             Properties config = loadConfig();
@@ -30,6 +39,11 @@ public class SystemInfoCollector {
         }
     }
 
+    /**
+     * Loads configuration from 'app.properties' file.
+     *
+     * @return Properties object, populated or empty if file not found.
+     */
     private static Properties loadConfig() {
         Properties props = new Properties();
         Path path = Paths.get("app.properties");

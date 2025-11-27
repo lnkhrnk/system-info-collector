@@ -27,12 +27,15 @@ cd system-info-collector
 memory.output.unit=MB
 include.network.info=false
 ```
+
+memory.output.unit отвечает за ормат вывода памяти: MB или GB.
+include.network.info - включить ли в отчет информацию об IP
 ### 3. Сборка и запуск
 
 Для компиляции кода и создания исполняемого JAR-файла выполните команду в терминале из корня проекта:
 
 ```bash
-./gradlew clean build
+gradlew clean build
 ```
 
 ### 4. Запуск приложения
