@@ -15,8 +15,9 @@
 ### 1. Скачивание проекта
 Склонируйте репозиторий на свой локальный компьютер с помощью Git:
 
+Перейдите в папку проекта
 ```bash
-git clone <https://github.com/lnkhrnk/system-info-collector.git>
+git clone https://github.com/lnkhrnk/system-info-collector.git
 cd system-info-collector
 ```
 ### 2. Конфигурация
